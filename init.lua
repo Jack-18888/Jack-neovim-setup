@@ -20,7 +20,22 @@ vim.opt.scrolloff = 8 -- Keep 8 lines visible when scrolling
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.o.clipboard = "unnamedplus" -- Use system clipboard
+vim.opt.clipboard = "unnamedplus" -- Use system clipboard
+-- Explicitly configure the clipboard provider for WSL
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = "win32yank-wsl",
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+    cache_enabled = 0,
+  }
+end 
 
 vim.opt.foldenable = true -- Disable code folding by default
 

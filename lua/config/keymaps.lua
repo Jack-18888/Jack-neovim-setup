@@ -2,7 +2,7 @@
 
 -- keymaps
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true, desc = "Save file" })
-vim.keymap.set({ "i", "n" }, "<C-p>", "<cmd>80vsp | term powershell<CR>", { noremap = true, silent = true, desc = "Open terminal in split" })
+vim.keymap.set({ "i", "n" }, "<C-p>", "<cmd>60vsp | term<CR>", { noremap = true, silent = true, desc = "Open terminal in split" })
 
 vim.keymap.set("n", "<C-a>", "gg0vG$", { noremap = true, silent = true, desc = "Select all" })
 vim.keymap.set("n", "<leader>q", ":bd<CR>", { noremap = true, silent = true, desc = "Close buffer and split" })

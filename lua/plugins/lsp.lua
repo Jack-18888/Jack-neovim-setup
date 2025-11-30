@@ -12,6 +12,7 @@ return {
         "gopls", -- Go Language Server
         "gofumpt", -- Stricter Go Formatter
         "goimports", -- Automatically fixes imports
+        "clangd",
       },
     },
     config = function(_, opts)
@@ -47,7 +48,12 @@ return {
 
       -- 3. Configure mason-lspconfig
       require("mason-lspconfig").setup({
-        ensure_installed = { "pyright", "gopls", "ts_ls" }, -- Only Python now
+        ensure_installed = {
+          "pyright", -- Python LSP
+          "ruff",    -- Python Linter/Formatter
+          "gopls", -- Go Language Server
+          "clangd",
+        },
         handlers = {
           -- Default handler (optional, but good practice)
           function(server_name)
@@ -62,6 +68,27 @@ return {
             require("lspconfig").pyright.setup({
               on_attach = on_attach,
               capabilities = capabilities,
+            })
+          end,
+
+          ["clangd"] = function()
+            require("lspconfig").clangd.setup({
+              on_attach = on_attach,
+              capabilities = capabilities,
+              cmd = {
+                "clangd",
+                "--background-index",
+                "--clang-tidy",
+                "--header-insertion=iwyu",
+                "--completion-style=detailed",
+                "--function-arg-placeholders",
+                "--fallback-style=llvm",
+              },
+              init_options = {
+                usePlaceholders = true,
+                completeUnimported = true,
+                clangdFileStatus = true,
+              },
             })
           end,
 
