@@ -1,5 +1,7 @@
 -- File: init.lua
 
+vim.opt.termguicolors = true
+
 require("config.lazy")
 require("config.keymaps")
 require("config.autocmds")
@@ -39,11 +41,6 @@ end
 
 vim.opt.foldenable = true -- Disable code folding by default
 
--- Set highlight groups
-vim.api.nvim_set_hl(0, "String", { fg = "#61bd6b" })
-vim.api.nvim_set_hl(0, "Identifier", { fg = "#ddffe1" })
-vim.api.nvim_set_hl(0, "@variable", { link = "Identifier" })
-vim.api.nvim_set_hl(0, "@lsp.type.variable.c", { link = "Identifier" })
-
 -- Set default colorscheme 
 vim.cmd("colorscheme gruvbox-material")
+

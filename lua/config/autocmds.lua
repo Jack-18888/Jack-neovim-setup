@@ -55,3 +55,20 @@ autocmd("BufWritePre", {
     vim.lsp.buf.format()
   end,
 })
+
+-- Create an autocommand that runs whenever a colorscheme is loaded
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "String", { fg = "#61bd6b" })
+    -- Define the base Identifier color
+    vim.api.nvim_set_hl(0, "Identifier", { fg = "#d3e3d3" })
+    -- Link the others to it
+    vim.api.nvim_set_hl(0, "@variable", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "@lsp.type.variable.c", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.parameter.declaration.c", { link = "Identifier" })
+  end,
+})
+
+-- Now load the theme
+vim.cmd("colorscheme gruvbox-material")
