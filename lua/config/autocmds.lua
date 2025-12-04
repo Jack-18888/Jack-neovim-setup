@@ -61,12 +61,15 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   callback = function()
     vim.api.nvim_set_hl(0, "String", { fg = "#61bd6b" })
-    -- Define the base Identifier color
-    vim.api.nvim_set_hl(0, "Identifier", { fg = "#d3e3d3" })
+    vim.api.nvim_set_hl(0, "Variable", { fg = "#a2cdde" })
+    vim.api.nvim_set_hl(0, "Constant", { fg = "#6ca2b8" })
     -- Link the others to it
-    vim.api.nvim_set_hl(0, "@variable", { link = "Identifier" })
-    vim.api.nvim_set_hl(0, "@lsp.type.variable.c", { link = "Identifier" })
-    vim.api.nvim_set_hl(0, "@lsp.typemod.parameter.declaration.c", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "@variable", { link = "Variable" })
+    vim.api.nvim_set_hl(0, "@lsp.type.variable.c", { link = "Variable" })
+    vim.api.nvim_set_hl(0, "@lsp.type.variable.cpp", { link = "Variable" })
+    vim.api.nvim_set_hl(0, "@lsp.type.parameter.cpp", { link = "Variable" })
+    vim.api.nvim_set_hl(0, "@lsp.mod.readonly.cpp", { link = "Constant" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.parameter.declaration.c", { link = "Variable" })
   end,
 })
 

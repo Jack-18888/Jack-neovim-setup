@@ -17,7 +17,7 @@ vim.opt.softtabstop = 2 -- Makes backspace/tab keys behave correctly with 4 spac
 vim.opt.expandtab = true -- Use spaces instead of actual tab characters
 
 vim.opt.number = true -- Good to have
-vim.opt.scrolloff = 8 -- Keep 8 lines visible when scrolling
+vim.opt.scrolloff = 16 -- Keep 8 lines visible when scrolling
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -44,3 +44,13 @@ vim.opt.foldenable = true -- Disable code folding by default
 -- Set default colorscheme 
 vim.cmd("colorscheme gruvbox-material")
 
+-- Diagnostics settings
+vim.diagnostic.config({
+  update_in_insert = true,
+  severity_sort = true,
+  virtual_text = {
+    spacing = 4,
+    prefix = "●",
+    souce = "always"
+  },
+})
