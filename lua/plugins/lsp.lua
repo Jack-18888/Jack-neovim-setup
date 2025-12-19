@@ -7,11 +7,15 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "pyright", -- Python LSP
-        "ruff",    -- Python Linter/Formatter
-        "gopls", -- Go Language Server
-        "gofumpt", -- Stricter Go Formatter
+        "pyright",   -- Python LSP
+        "ruff",      -- Python Linter/Formatter
+        "gopls",     -- Go Language Server
+        "gofumpt",   -- Stricter Go Formatter
         "goimports", -- Automatically fixes imports
+        -- START: C/C++ Additions for Mason
+        "clangd",    -- C/C++ Language Server
+        "clang-format", -- C/C++ Formatter
+        -- END: C/C++ Additions for Mason
       },
     },
     config = function(_, opts)
@@ -28,6 +32,7 @@ return {
     config = function()
       -- 1. Setup the common "on_attach" function
       local on_attach = function(client, bufnr)
+        -- ... (Your existing keymaps)
         local nmap = function(keys, func, desc)
           if desc then desc = "LSP: " .. desc end
           vim.keymap.set("n", keys, func, { buffer = bufnr, noremap = true, silent = true, desc = desc })
@@ -47,7 +52,8 @@ return {
 
       -- 3. Configure mason-lspconfig
       require("mason-lspconfig").setup({
-        ensure_installed = { "pyright", "gopls", "ts_ls" }, -- Only Python now
+        -- Add "clangd" to the list of LSPs to be configured
+        ensure_installed = { "pyright", "gopls", "ts_ls", "clangd" },
         handlers = {
           -- Default handler (optional, but good practice)
           function(server_name)
@@ -92,13 +98,34 @@ return {
                 },
               },
             })
-          end, 
-       },
+          end,
+
+          -- START: Explicit handler for clangd
+          ["clangd"] = function()
+            require("lspconfig").clangd.setup({
+              on_attach = on_attach,
+              capabilities = capabilities,
+              settings = {
+              -- clangd = {
+              --   fallbackFlags = {
+              --     "-xc++",                    -- Treat files as C++
+              --     "-std=c++20",               -- Use C++20 standard
+              --     -- This is the CRITICAL line: Tell clangd to query the exact g++ compiler
+              --     -- when no compile database is found.
+              --     "--query-driver=C:/msys64/ucrt64/bin/g++.exe",
+              --   },
+              -- },
+            },
+          })
+          end,
+          -- END: Explicit handler for clangd
+        },
       })
     end,
   },
 
   -- Autocompletion
+  -- ... (No changes needed for the autocompletion section)
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -152,6 +179,4 @@ return {
       })
     end,
   },
-
 }
-

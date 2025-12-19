@@ -19,9 +19,9 @@ autocmd("FileType", {
 -- We set tabstop to 4 so it looks like 4 spaces visually.
 autocmd("FileType", {
   group = augroup,
-  pattern = "go",
+  pattern = "go, cpp, c",
   callback = function()
-    vim.opt_local.expandtab = false  -- Use real tabs (Go standard)
+    vim.opt_local.expandtab = false  
     vim.opt_local.shiftwidth = 4
     vim.opt_local.tabstop = 4
     vim.opt_local.softtabstop = 4

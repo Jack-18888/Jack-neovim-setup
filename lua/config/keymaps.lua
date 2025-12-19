@@ -28,7 +28,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' 
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 -- toggle colorschemes 
-colorschemes = { "gruvbox-material", "tokyonight"}
+colorschemes = { "tokyonight", "vscode", "gruvbox-material" }
 local current_colorscheme_index = 1
 vim.keymap.set('n', '<a-c>', function()
   current_colorscheme_index = current_colorscheme_index % #colorschemes + 1
@@ -40,4 +40,9 @@ vim.keymap.set('n', '<a-c>', function()
       component_separators = " | ",
     },
   })
+  -- vim.api.nvim_set_hl(0, "Variable", { fg = "#abc7de" })
+  -- vim.api.nvim_set_hl(0, "Constant", { fg = "#83afd4" })
+  -- vim.api.nvim_set_hl(0, "@lsp.type.variable.cpp", { link = "Variable" })
+  -- vim.api.nvim_set_hl(0, "@lsp.type.parameter.cpp", { link = "Variable" })
+  -- vim.api.nvim_set_hl(0, "@lsp.mod.readonly.cpp", { link = "Constant" })
 end, { desc = 'Toggle colorscheme' })
