@@ -115,7 +115,7 @@ return {
     config = function()
       require("lualine").setup({
         options = {
-          theme = "gruvbox-material",
+          theme = "auto",
           section_separators = " | ",
           component_separators = " | ",
         },

@@ -33,13 +33,7 @@ local current_colorscheme_index = 1
 vim.keymap.set('n', '<a-c>', function()
   current_colorscheme_index = current_colorscheme_index % #colorschemes + 1
   vim.cmd("colorscheme " .. colorschemes[current_colorscheme_index])
-  require("lualine").setup({
-    options = {
-      theme = colorschemes[current_colorscheme_index],
-      section_separators = " | ",
-      component_separators = " | ",
-    },
-  })
+  
   -- vim.api.nvim_set_hl(0, "Variable", { fg = "#abc7de" })
   -- vim.api.nvim_set_hl(0, "Constant", { fg = "#83afd4" })
   -- vim.api.nvim_set_hl(0, "@lsp.type.variable.cpp", { link = "Variable" })
