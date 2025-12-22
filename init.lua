@@ -9,6 +9,8 @@ vim.opt.relativenumber = true
 vim.opt.autoindent = true
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+vim.opt.guifont = "JetBrainsMono Nerd Font:h10:b"
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2

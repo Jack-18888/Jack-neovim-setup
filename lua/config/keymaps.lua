@@ -2,7 +2,7 @@
 
 -- keymaps
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true, desc = "Save file" })
-vim.keymap.set({ "i", "n" }, "<C-p>", "<cmd>80vsp | term powershell<CR>", { noremap = true, silent = true, desc = "Open terminal in split" })
+vim.keymap.set({ "i", "n" }, "<C-p>", "<cmd>80vsp | term powershell -NoExit -Command \"Invoke-Expression (&starship init powershell)\"<CR>", { noremap = true, silent = true, desc = "Open terminal in split" })
 
 vim.keymap.set("n", "<C-a>", "gg0vG$", { noremap = true, silent = true, desc = "Select all" })
 vim.keymap.set("n", "<leader>q", ":bd<CR>", { noremap = true, silent = true, desc = "Close buffer and split" })
@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader><Tab>", function()
 end, { noremap = true, silent = true, desc = "Go to previous buffer and close those to the right" })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode to Normal mode" })
- 
+
 -- telescope shortcuts 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -46,3 +46,7 @@ vim.keymap.set('n', '<a-c>', function()
   -- vim.api.nvim_set_hl(0, "@lsp.type.parameter.cpp", { link = "Variable" })
   -- vim.api.nvim_set_hl(0, "@lsp.mod.readonly.cpp", { link = "Constant" })
 end, { desc = 'Toggle colorscheme' })
+
+
+-- use cmdline for command 
+-- vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true})
