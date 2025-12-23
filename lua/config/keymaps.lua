@@ -5,7 +5,25 @@ vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>w<CR>", { noremap = true, silent = t
 vim.keymap.set({ "i", "n" }, "<C-p>", "<cmd>80vsp | term powershell -NoExit -Command \"Invoke-Expression (&starship init powershell)\"<CR>", { noremap = true, silent = true, desc = "Open terminal in split" })
 
 vim.keymap.set("n", "<C-a>", "gg0vG$", { noremap = true, silent = true, desc = "Select all" })
-vim.keymap.set("n", "<leader>q", ":bd<CR>", { noremap = true, silent = true, desc = "Close buffer and split" })
+vim.keymap.set("n", "<leader>q", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  
+  -- Get a list of all listed buffers (excluding neo-tree)
+  local buffers = vim.tbl_filter(function(b)
+    return vim.api.nvim_buf_is_valid(b) and vim.bo[b].buflisted
+  end, vim.api.nvim_list_bufs())
+
+  -- If we are closing the last buffer, create a new empty one first
+  if #buffers <= 1 then
+    vim.cmd("enew")
+  else
+    -- Otherwise, go to the previous buffer before deleting
+    vim.cmd("bp")
+  end
+
+  -- Delete the original buffer
+  vim.cmd("bd " .. bufnr)
+end, { noremap = true, silent = true, desc = "Close buffer and split" })
 vim.keymap.set("n", "<leader>fq", ":bd!<CR>", { noremap = true, silent = true, desc = "Force close buffer and split" })
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle file tree" })
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next buffer" })
