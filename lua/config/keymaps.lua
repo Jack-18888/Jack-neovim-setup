@@ -25,6 +25,7 @@ vim.keymap.set("n", "<leader>q", function()
   vim.cmd("bd " .. bufnr)
 end, { noremap = true, silent = true, desc = "Close buffer and split" })
 vim.keymap.set("n", "<leader>fq", ":bd!<CR>", { noremap = true, silent = true, desc = "Force close buffer and split" })
+
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle file tree" })
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true, desc = "Previous buffer" })
@@ -62,3 +63,4 @@ end, { desc = 'Toggle colorscheme' })
 
 -- use cmdline for command 
 -- vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true})
+

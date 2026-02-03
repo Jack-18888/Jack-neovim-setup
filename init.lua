@@ -16,6 +16,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2 -- Makes backspace/tab keys behave correctly with 4 spaces
 vim.opt.expandtab = true -- Use spaces instead of actual tab characters
+vim.opt.swapfile = false
 
 vim.opt.number = true -- Good to have
 vim.opt.scrolloff = 8 -- Keep 8 lines visible when scrolling
