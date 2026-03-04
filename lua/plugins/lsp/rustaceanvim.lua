@@ -5,6 +5,12 @@ return {
     version = '^6', -- Recommended
     lazy = false, -- This plugin is already lazy
     config = function()
+
+      -- Enable diagnostics (errors/warnings) to update in insert mode
+      vim.diagnostic.config({
+        update_in_insert = true,
+      })
+
       -- This is where you configure rustaceanvim
       vim.g.rustaceanvim = {
         server = {
@@ -16,7 +22,15 @@ return {
 
             vim.keymap.set("n", "K", function()
               vim.cmd.RustLsp({'hover', 'actions'})
-            end, { silent = true, buffer = bufnr }) 
+            end, { silent = true, buffer = bufnr, desc = "Rust Code Documentation" }) 
+
+            -- format on save 
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format({ id = client.id, bufnr = bufnr })
+              end,
+            })
           end,
           default_settings = {
             ['rust-analyzer'] = {
