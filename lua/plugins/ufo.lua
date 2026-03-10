@@ -53,11 +53,14 @@ return {
       require("statuscol").setup({
         setopt = true,
         segments = {
-          -- This segment will show the fold icon, but NOT the nested number
-          { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-          { text = { " " } }, -- Space
-          { text = { builtin.lnumfunc }, click = "v:lua.ScLa" }, -- Line number
-          { text = { " " } }, -- Space
+          -- 1. Fold column
+          { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+          
+          -- 2. Sign column (for gitsigns, etc.)
+          { text = { "%s" }, click = "v:lua.ScSa" },
+          
+          -- 3. Line numbers
+          { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
         },
       })
     end,
