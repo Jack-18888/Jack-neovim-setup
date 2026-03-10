@@ -47,7 +47,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' 
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 -- toggle colorschemes 
-colorschemes = { "tokyonight", "vscode", "gruvbox-material" }
+colorschemes = { "catppuccin-frappe", "tokyonight", "vscode", "gruvbox-material" }
 local current_colorscheme_index = 1
 vim.keymap.set('n', '<a-c>', function()
   current_colorscheme_index = current_colorscheme_index % #colorschemes + 1

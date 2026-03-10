@@ -33,7 +33,7 @@ vim.api.nvim_set_hl(0, "@variable", { fg = "#ddffe1" })
 vim.api.nvim_set_hl(0, "String", { fg = "#61bd6b" })
 
 -- Set default colorscheme 
-vim.cmd("colorscheme tokyonight")
+vim.cmd("colorscheme catppuccin-frappe")
 
 -- Set custom coloring
 -- vim.api.nvim_set_hl(0, "Variable", { fg = "#abc7de" })
