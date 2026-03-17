@@ -8,6 +8,7 @@ return {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "NvimTreeToggle",
     config = function()
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1

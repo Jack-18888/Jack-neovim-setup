@@ -3,6 +3,7 @@ return {
   -- LSP Configuration
   {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
     },
@@ -30,7 +31,7 @@ return {
       -- 3. Configure mason-lspconfig
       require("mason-lspconfig").setup({
         -- Add "clangd" to the list of LSPs to be configured
-        ensure_installed = { "pyright", "gopls", "ts_ls", "clangd" },
+        ensure_installed = { "pyright", "gopls", "clangd" },
         handlers = {
           -- Default handler (optional, but good practice)
           function(server_name)
@@ -65,33 +66,12 @@ return {
             })
           end,
 
-          ["ts_ls"] = function()
-            require("lspconfig").tl_ls.setup({
-              on_attach = on_attach,
-              capabilities = capabilities,
-              settings = {
-                telemetry = {
-                  enable = false,
-                },
-              },
-            })
-          end,
-
           -- START: Explicit handler for clangd
           ["clangd"] = function()
             require("lspconfig").clangd.setup({
               on_attach = on_attach,
               capabilities = capabilities,
               settings = {
-              -- clangd = {
-              --   fallbackFlags = {
-              --     "-xc++",                    -- Treat files as C++
-              --     "-std=c++20",               -- Use C++20 standard
-              --     -- This is the CRITICAL line: Tell clangd to query the exact g++ compiler
-              --     -- when no compile database is found.
-              --     "--query-driver=C:/msys64/ucrt64/bin/g++.exe",
-              --   },
-              -- },
             },
           })
           end,
