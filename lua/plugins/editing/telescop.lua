@@ -2,10 +2,10 @@
 return {
   'nvim-telescope/telescope.nvim', tag = 'v0.1.9',
   keys = {
-    vim.keymap.set('n', '<leader>ff', require("telescope.builtin").find_files, { desc = 'Telescope find files' }),
-    vim.keymap.set('n', '<leader>fg', require("telescope.builtin").live_grep, { desc = 'Telescope live grep' }),
-    vim.keymap.set('n', '<leader>fb', require("telescope.builtin").buffers, { desc = 'Telescope buffers' }),
-    vim.keymap.set('n', '<leader>fh', require("telescope.builtin").help_tags, { desc = 'Telescope help tags' }),
+    vim.keymap.set('n', '<leader>ff', "<cmd>Telescope find_files<cr>", { desc = 'Telescope find files' }),
+    vim.keymap.set('n', '<leader>fg', "<cmd>Telescope live_grep<cr>", { desc = 'Telescope live grep' }),
+    vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers<cr>", { desc = 'Telescope buffers' }),
+    vim.keymap.set('n', '<leader>fh', "<cmd>Telescope help_tags<cr>", { desc = 'Telescope help tags' }),
   },
   dependencies = { 'nvim-lua/plenary.nvim' },
 }

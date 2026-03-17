@@ -25,13 +25,19 @@ vim.opt.scrolloff = 8 -- Keep 8 lines visible when scrolling
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.o.clipboard = "unnamedplus" -- Use system clipboard
+-- defer setting clipboard until after plugins are loaded to avoid conflicts with plugin clipboard settings
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = function()
+    vim.opt.clipboard = "unnamedplus" -- Use system clipboard
+  end,
+})
 
 vim.opt.foldenable = true -- Disable code folding by default
 
 -- Set highlight groups
-vim.api.nvim_set_hl(0, "@variable", { fg = "#ddffe1" })
-vim.api.nvim_set_hl(0, "String", { fg = "#61bd6b" })
+-- vim.api.nvim_set_hl(0, "@variable", { fg = "#ddffe1" })
+-- vim.api.nvim_set_hl(0, "String", { fg = "#61bd6b" })
 
 -- Set default colorscheme 
 vim.cmd("colorscheme catppuccin-frappe")
