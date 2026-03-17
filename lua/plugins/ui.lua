@@ -3,36 +3,17 @@
 
 return {
 
-  -- Colorscheme
-  {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    priority = 900,
-    opts = {},
-    config = function()
-      vim.cmd.colorscheme("tokyonight")
-    end,
-  },
-
-  {
-    "sainnhe/gruvbox-material",
-    lazy = true,
-    priority = 900,
-    opts = {},
-    config = function()
-      vim.cmd.colorscheme("gruvbox-material")
-    end,
-  },
-
   -- File Explorer
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "NvimTreeToggle",
     config = function()
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
       require("nvim-tree").setup({
+        sync_root_with_cwd = true,
         view = { width = 35 },
         git = { enable = true },
         renderer = {
@@ -44,6 +25,11 @@ return {
               folder_arrow = true,
               git = true,
             },
+          },
+        },
+        actions = {
+          open_file = {
+            quit_on_open = false,
           },
         },
       })
@@ -90,7 +76,7 @@ return {
     config = function()
       require("lualine").setup({
         options = {
-          theme = "gruvbox-material",
+          theme = "auto",
           section_separators = " | ",
           component_separators = " | ",
         },

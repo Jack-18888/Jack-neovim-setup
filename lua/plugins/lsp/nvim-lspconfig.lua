@@ -1,34 +1,16 @@
--- File: lua/plugins/lsp.lua
 
 return {
-
-  -- Tool Installer
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "pyright", -- Python LSP
-        "ruff",    -- Python Linter/Formatter
-        "gopls", -- Go Language Server
-        "gofumpt", -- Stricter Go Formatter
-        "goimports", -- Automatically fixes imports
-        "clangd",
-      },
-    },
-    config = function(_, opts)
-      require("mason").setup(opts)
-    end,
-  },
-
   -- LSP Configuration
   {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
       -- 1. Setup the common "on_attach" function
       local on_attach = function(client, bufnr)
+        -- ... (Your existing keymaps)
         local nmap = function(keys, func, desc)
           if desc then desc = "LSP: " .. desc end
           vim.keymap.set("n", keys, func, { buffer = bufnr, noremap = true, silent = true, desc = desc })
@@ -48,12 +30,8 @@ return {
 
       -- 3. Configure mason-lspconfig
       require("mason-lspconfig").setup({
-        ensure_installed = {
-          "pyright", -- Python LSP
-          "ruff",    -- Python Linter/Formatter
-          "gopls", -- Go Language Server
-          "clangd",
-        },
+        -- Add "clangd" to the list of LSPs to be configured
+        ensure_installed = { "pyright", "gopls", "clangd" },
         handlers = {
           -- Default handler (optional, but good practice)
           function(server_name)
@@ -109,76 +87,18 @@ return {
             })
           end,
 
-          ["ts_ls"] = function()
-            require("lspconfig").tl_ls.setup({
+          -- START: Explicit handler for clangd
+          ["clangd"] = function()
+            require("lspconfig").clangd.setup({
               on_attach = on_attach,
               capabilities = capabilities,
               settings = {
-                telemetry = {
-                  enable = false,
-                },
-              },
-            })
-          end, 
-       },
-      })
-    end,
-  },
-
-  -- Autocompletion
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-    },
-    config = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
+            },
+          })
           end,
+          -- END: Explicit handler for clangd
         },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-        }),
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        }),
       })
     end,
-  },
-
+  }
 }
-

@@ -34,7 +34,7 @@ return {
             dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
             dashboard.button("Space t", "  File Tree", ":NvimTreeToggle<CR>"),
             dashboard.button("Ctrl p", "  Open Terminal", ":80vsp | term powershell<CR>"),
-            dashboard.button("s", "勒  Search Text", ":Telescope live_grep<CR>"), 
+            dashboard.button("s", "勒 Search Text", ":Telescope live_grep<CR>"), 
             dashboard.button("f", "  Find File", ":Telescope find_files<CR>"), 
             dashboard.button("r", "  Recent", ":Telescope oldfiles<CR>"),
             dashboard.button("q", "  Quit", ":qa<CR>"),
