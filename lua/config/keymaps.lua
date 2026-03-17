@@ -39,13 +39,6 @@ end, { noremap = true, silent = true, desc = "Go to previous buffer and close th
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode to Normal mode" })
 
--- telescope shortcuts 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
-
 -- toggle colorschemes 
 colorschemes = { "catppuccin-frappe", "tokyonight", "vscode", "gruvbox-material" }
 local current_colorscheme_index = 1
