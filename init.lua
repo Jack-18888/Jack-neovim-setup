@@ -13,10 +13,6 @@ vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.guifont = "JetBrainsMono Nerd Font:h10:b"
 vim.opt.signcolumn = "yes"
 
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2 -- Makes backspace/tab keys behave correctly with 4 spaces
-vim.opt.expandtab = true -- Use spaces instead of actual tab characters
 vim.opt.swapfile = false
 
 vim.opt.number = true -- Good to have
