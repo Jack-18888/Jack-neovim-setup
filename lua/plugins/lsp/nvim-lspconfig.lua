@@ -32,14 +32,12 @@ return {
         automatic_enable = false,
       })
 
-      local lspconfig = require("lspconfig")
-
-      lspconfig.pyright.setup({
+      vim.lsp.config("pyright", {
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
-      lspconfig.gopls.setup({
+      vim.lsp.config("gopls", {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -53,13 +51,17 @@ return {
         },
       })
 
-      lspconfig.clangd.setup({
+      vim.lsp.config("clangd", {
         cmd = { "C:\\msys64\\ucrt64\\bin\\clangd.exe" },
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
         },
       })
+
+      vim.lsp.enable("pyright")
+      vim.lsp.enable("gopls")
+      vim.lsp.enable("clangd")
     end,
   }
 }
