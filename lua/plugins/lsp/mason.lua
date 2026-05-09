@@ -12,7 +12,7 @@ return {
         "gofumpt",   -- Stricter Go Formatter
         "goimports", -- Automatically fixes imports
         -- START: C/C++ Additions for Mason
-        "clangd",    -- C/C++ Language Server
+        -- "clangd",    -- C/C++ Language Server
         "clang-format", -- C/C++ Formatter
         -- END: C/C++ Additions for Mason
       },
