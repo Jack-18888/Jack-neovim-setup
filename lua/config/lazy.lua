@@ -32,7 +32,7 @@ require("lazy").setup({
     { import = "plugins.editing" },
     { import = "plugins.lsp" },
     { import = "plugins.treesitter" },
-    -- { import = "plugins.debugging" },
+    { import = "plugins.debugging" },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
