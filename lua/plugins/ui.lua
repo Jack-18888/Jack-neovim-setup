@@ -32,6 +32,10 @@ return {
             quit_on_open = false,
           },
         },
+        filters = {
+          dotfiles = false, -- Set to true to HIDE dotfiles by default
+          git_ignored = false, -- Set to true to HIDE git-ignored files by default
+        },
       })
    end,
   },
