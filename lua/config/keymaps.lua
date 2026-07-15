@@ -3,6 +3,10 @@
 -- keymaps
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true, desc = "Save file" })
 vim.keymap.set({ "i", "n" }, "<C-p>", "<cmd>80vsp | term pwsh<CR>", { noremap = true, silent = true, desc = "Open terminal in split" })
+vim.keymap.set('n', '<leader>rv', function()
+  local api = require('nvim-tree.api')
+  api.tree.find_file({ open = true, focus = true })
+end, { silent = true, desc = 'NvimTree Reveal File' })
 
 local function safe_close_buffer(force)
   local current_buf = vim.api.nvim_get_current_buf()
