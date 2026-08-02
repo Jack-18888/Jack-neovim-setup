@@ -8,7 +8,7 @@ return {
   	config = function()
   		require("copilot").setup({
   			suggestion = {
-  				enabled = true,
+  				enabled = false,
   				auto_trigger = true,
   				debounce = 500,
   				keymap = {
@@ -21,7 +21,7 @@ return {
   				},
   			},
   			panel = {
-  				enabled = true,
+  				enabled = false,
   				auto_refresh = true,
   			},
   			-- You can customize the copilot setup further here
