@@ -1,5 +1,8 @@
 -- File: init.lua
 
+-- Enable byte-code caching loader for faster startup
+vim.loader.enable()
+
 require("config.lazy")
 require("config.keymaps")
 require("config.autocmds")

@@ -69,17 +69,19 @@ end, { noremap = true, silent = true, desc = "Go to previous buffer and close th
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode to Normal mode" })
 
 -- toggle colorschemes 
-colorschemes = { "catppuccin-frappe", "tokyonight", "vscode", "gruvbox-material" }
+local colorschemes = { "catppuccin-frappe", "tokyonight", "vscode", "gruvbox-material" }
 local current_colorscheme_index = 1
 vim.keymap.set('n', '<a-c>', function()
   current_colorscheme_index = current_colorscheme_index % #colorschemes + 1
-  vim.cmd("colorscheme " .. colorschemes[current_colorscheme_index])
-  
-  -- vim.api.nvim_set_hl(0, "Variable", { fg = "#abc7de" })
-  -- vim.api.nvim_set_hl(0, "Constant", { fg = "#83afd4" })
-  -- vim.api.nvim_set_hl(0, "@lsp.type.variable.cpp", { link = "Variable" })
-  -- vim.api.nvim_set_hl(0, "@lsp.type.parameter.cpp", { link = "Variable" })
-  -- vim.api.nvim_set_hl(0, "@lsp.mod.readonly.cpp", { link = "Constant" })
+  local scheme = colorschemes[current_colorscheme_index]
+  if scheme:find("tokyonight") then
+    require("lazy").load({ plugins = { "tokyonight.nvim" } })
+  elseif scheme:find("vscode") then
+    require("lazy").load({ plugins = { "vscode.nvim" } })
+  elseif scheme:find("gruvbox") then
+    require("lazy").load({ plugins = { "gruvbox-material" } })
+  end
+  vim.cmd("colorscheme " .. scheme)
 end, { desc = 'Toggle colorscheme' })
 
 

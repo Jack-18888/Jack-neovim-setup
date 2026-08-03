@@ -2,7 +2,7 @@
 return {
   {
     "pmizio/typescript-tools.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()
       -- 1. Define the on_attach function with your keymaps

@@ -109,6 +109,7 @@ local function globs_to_string(globs)
 end
 
 local function set_allow_globs()
+  ensure_policy()
   vim.ui.input({
     prompt = 'Telescope include globs (comma-separated): ',
     default = globs_to_string(search_policy.allow_globs),
@@ -125,6 +126,7 @@ local function set_allow_globs()
 end
 
 local function set_exclude_globs()
+  ensure_policy()
   vim.ui.input({
     prompt = 'Telescope exclude globs (comma-separated): ',
     default = globs_to_string(search_policy.exclude_globs),
@@ -146,6 +148,7 @@ local function reset_glob_policy()
 end
 
 local function show_glob_policy()
+  ensure_policy()
   local include = globs_to_string(search_policy.allow_globs)
   local exclude = globs_to_string(search_policy.exclude_globs)
 
@@ -161,6 +164,7 @@ local function show_glob_policy()
 end
 
 local function build_rg_glob_args()
+  ensure_policy()
   local args = {}
 
   for _, pattern in ipairs(search_policy.exclude_globs) do
@@ -199,7 +203,11 @@ local function live_grep_with_policy()
   })
 end
 
-load_policy()
+local function ensure_policy()
+  if not search_policy or not search_policy.allow_globs then
+    load_policy()
+  end
+end
 
 return {
   'nvim-telescope/telescope.nvim', tag = 'v0.1.9',
