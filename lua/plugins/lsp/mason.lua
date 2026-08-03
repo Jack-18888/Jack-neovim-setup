@@ -11,13 +11,17 @@ return {
         "gopls",     -- Go Language Server
         "gofumpt",   -- Stricter Go Formatter
         "goimports", -- Automatically fixes imports
-        -- START: C/C++ Additions for Mason
-        -- "clangd",    -- C/C++ Language Server
+        "clangd",    -- C/C++ Language Server
         "clang-format", -- C/C++ Formatter
-        -- END: C/C++ Additions for Mason
       },
     },
     config = function(_, opts)
+      if vim.fn.has("win32") == 1 then
+        local win_python = "C:/Users/T14G3/AppData/Local/Python/pythoncore-3.14-64"
+        if not vim.env.PATH:find("pythoncore-3.14-64", 1, true) then
+          vim.env.PATH = win_python .. ";" .. vim.env.PATH
+        end
+      end
       require("mason").setup(opts)
     end,
   }
