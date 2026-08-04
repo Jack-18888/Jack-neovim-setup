@@ -108,6 +108,12 @@ local function globs_to_string(globs)
   return table.concat(globs, ', ')
 end
 
+local function ensure_policy()
+  if not search_policy or not search_policy.allow_globs then
+    load_policy()
+  end
+end
+
 local function set_allow_globs()
   ensure_policy()
   vim.ui.input({
@@ -201,12 +207,6 @@ local function live_grep_with_policy()
       return args
     end,
   })
-end
-
-local function ensure_policy()
-  if not search_policy or not search_policy.allow_globs then
-    load_policy()
-  end
 end
 
 return {
