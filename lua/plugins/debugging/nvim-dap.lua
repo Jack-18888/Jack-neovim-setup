@@ -8,11 +8,20 @@ return {
       "williamboman/mason.nvim",
       "jay-babu/mason-nvim-dap.nvim",
     },
+    keys = {
+      { "<F5>", function() require("dap").continue() end, desc = "Debug: Start/Continue" },
+      { "<F1>", function() require("dap").step_into() end, desc = "Debug: Step Into" },
+      { "<F2>", function() require("dap").step_over() end, desc = "Debug: Step Over" },
+      { "<F3>", function() require("dap").step_out() end, desc = "Debug: Step Out" },
+      { "<leader>b", function() require("dap").toggle_breakpoint() end, desc = "Debug: Toggle Breakpoint" },
+      { "<leader>B", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Debug: Set Breakpoint" },
+    },
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
+      local mason_nvim_dap = require("mason-nvim-dap")
 
-      require("mason-nvim-dap").setup({
+      mason_nvim_dap.setup({
         -- Makes a best effort to setup the various debuggers with reasonable debug configurations
         automatic_installation = true,
 
@@ -23,9 +32,38 @@ return {
         -- You'll need to check that you have the required things installed
         -- online, please don't ask me how to install them :)
         ensure_installed = {
-          -- Update this to ensure that you have the debuggers for the langs you want
+          "cppdbg",
         },
       })
+
+      local gdb_path = vim.fn.exepath("gdb")
+      if gdb_path == "" then
+        gdb_path = "gdb"
+      end
+
+      dap.configurations.cpp = {
+        {
+          name = "Launch file (cppdbg)",
+          type = "cppdbg",
+          request = "launch",
+          program = function()
+            local path = vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            return path
+          end,
+          cwd = "${workspaceFolder}",
+          stopAtEntry = false,
+          MIMode = "gdb",
+          miDebuggerPath = gdb_path,
+          setupCommands = {
+            {
+              text = "-enable-pretty-printing",
+              description = "Enable pretty printing",
+              ignoreFailures = true,
+            },
+          },
+        },
+      }
+      dap.configurations.c = dap.configurations.cpp
 
       -- Dap UI setup
       -- For more information, see |:help nvim-dap-ui|

@@ -5,12 +5,12 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      -- 1. Setup the common "on_attach" function
       local on_attach = function(client, bufnr)
-        -- ... (Your existing keymaps)
         local nmap = function(keys, func, desc)
           if desc then desc = "LSP: " .. desc end
           vim.keymap.set("n", keys, func, { buffer = bufnr, noremap = true, silent = true, desc = desc })
@@ -25,29 +25,17 @@ return {
         nmap("<leader>e", vim.diagnostic.open_float, "Show Diagnostics")
       end
 
-      -- 2. Setup capabilities for autocompletion
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- 3. Configure mason-lspconfig
       require("mason-lspconfig").setup({
-        -- Add "clangd" to the list of LSPs to be configured
         ensure_installed = { "pyright", "gopls", "clangd" },
-        handlers = {
-          -- Default handler (optional, but good practice)
-          function(server_name)
-            require("lspconfig")[server_name].setup({
-              on_attach = on_attach,
-              capabilities = capabilities,
-            })
-          end,
+        automatic_enable = false,
+      })
 
-          -- Explicit handler for pyright
-          ["pyright"] = function()
-            require("lspconfig").pyright.setup({
-              on_attach = on_attach,
-              capabilities = capabilities,
-            })
-          end,
+      vim.lsp.config("pyright", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
 
           ["clangd"] = function()
             require("lspconfig").clangd.setup({
@@ -94,11 +82,21 @@ return {
               capabilities = capabilities,
               settings = {
             },
-          })
-          end,
-          -- END: Explicit handler for clangd
+          },
         },
       })
+
+      vim.lsp.config("clangd", {
+        cmd = { "C:\\msys64\\ucrt64\\bin\\clangd.exe" },
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+        },
+      })
+
+      vim.lsp.enable("pyright")
+      vim.lsp.enable("gopls")
+      vim.lsp.enable("clangd")
     end,
   }
 }

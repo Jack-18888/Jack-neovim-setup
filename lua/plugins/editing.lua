@@ -27,12 +27,12 @@ return {
   -- Linter
   {
     "mfussenegger/nvim-lint",
-    event = { "BufWritePost", "BufEnter" },
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     config = function()
       require("lint").linters_by_ft = {
         python = { "ruff" },
       }
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+      vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
         callback = function()
           require("lint").try_lint()
         end,

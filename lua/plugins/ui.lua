@@ -32,6 +32,10 @@ return {
             quit_on_open = false,
           },
         },
+        filters = {
+          dotfiles = false, -- Set to true to HIDE dotfiles by default
+          git_ignored = false, -- Set to true to HIDE git-ignored files by default
+        },
       })
    end,
   },
@@ -39,6 +43,7 @@ return {
   -- Icons
   {
     "nvim-tree/nvim-web-devicons",
+    lazy = true,
     config = function()
       require("nvim-web-devicons").setup()
     end,
@@ -48,6 +53,7 @@ return {
   {
     "akinsho/bufferline.nvim",
     version = "*",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("bufferline").setup({
@@ -72,6 +78,7 @@ return {
   -- Status Line
   {
     "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({

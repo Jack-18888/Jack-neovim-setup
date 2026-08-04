@@ -48,6 +48,7 @@ return {
   -- 1. statuscol.nvim: Takes control of the column to hide the numbers
   {
     "luukvbaal/statuscol.nvim",
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       local builtin = require("statuscol.builtin")
       require("statuscol").setup({

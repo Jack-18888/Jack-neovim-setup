@@ -2,6 +2,9 @@
 
 vim.opt.termguicolors = true
 
+-- Enable byte-code caching loader for faster startup
+vim.loader.enable()
+
 require("config.lazy")
 require("config.keymaps")
 require("config.autocmds")
@@ -15,10 +18,6 @@ vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 vim.opt.guifont = "JetBrainsMono Nerd Font:h10:b"
 vim.opt.signcolumn = "yes"
 
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2 -- Makes backspace/tab keys behave correctly with 4 spaces
-vim.opt.expandtab = true -- Use spaces instead of actual tab characters
 vim.opt.swapfile = false
 
 vim.opt.number = true -- Good to have
@@ -34,8 +33,6 @@ vim.api.nvim_create_autocmd("User", {
     vim.opt.clipboard = "unnamedplus" -- Use system clipboard
   end,
 })
-
-vim.opt.foldenable = true -- Disable code folding by default
 
 -- Set highlight groups
 -- vim.api.nvim_set_hl(0, "@variable", { fg = "#ddffe1" })
