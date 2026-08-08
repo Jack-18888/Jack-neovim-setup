@@ -23,7 +23,7 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 | `lua/plugins/ui/` | nvim-tree, bufferline, lualine, alpha dashboard, noice, fidget, tiny-inline-diagnostic |
 | `lua/plugins/ai/copilot.lua` | Copilot (suggestions disabled by default) |
 | `lua/plugins/debugging/` | nvim-dap + nvim-dap-ui (C/C++ cppdbg configuration) |
-| `lua/plugins/treesitter/` | nvim-treesitter and textobjects |
+| `lua/plugins/treesitter/` | Native treesitter config (Neovim 0.12+): `native-treesitter.lua` enables built-in highlighting via `vim.treesitter.start()` and textobjects (`main` branch of nvim-treesitter-textobjects); `treesitter-manager.lua` manages parser installation via `tree-sitter` CLI |
 | `lua/plugins/colorschemes/` | catppuccin (default), tokyonight, vscode, gruvbox-material |
 | `lazy-lock.json` | Local plugin lockfile (gitignored) |
 | `startup.log` | Startup profiling output (gitignored) |
@@ -36,8 +36,9 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 - Keep global settings in `init.lua`, keymaps in `lua/config/keymaps.lua`, filetype behavior in `lua/config/autocmds.lua`.
 - Formatting/linting belong in `lua/plugins/editing.lua` (`formatters_by_ft` / `linters_by_ft`).
 - LSP servers: register tools in `lua/plugins/lsp/mason.lua` (`ensure_installed`) and enable/configure them in `lua/plugins/lsp/nvim-lspconfig.lua` via `vim.lsp.config` + `vim.lsp.enable` (Neovim 0.11 API). `automatic_enable = false` — servers are enabled explicitly per language.
-- OS-specific paths are hard-coded: clangd at `C:\msys64\ucrt64\bin\clangd.exe`, Python at `C:/Users/T14G3/AppData/Local/Python/pythoncore-3.14-64` (prepended to PATH on win32 in `mason.lua`). The `ubuntu-config` branch carries the Linux equivalents.
+- OS-specific paths are hard-coded: MSYS2 UCRT64 toolchain at `D:\msys64\ucrt64\bin` (prepended to PATH on win32 in `init.lua` — provides gcc for tree-sitter and clangd), Python at `C:/Users/T14G3/AppData/Local/Python/pythoncore-3.14-64` (prepended to PATH on win32 in `mason.lua`). The `ubuntu-config` branch carries the Linux equivalents.
 - Colorscheme cycle order lives in the `colorschemes` list in `lua/config/keymaps.lua`; catppuccin is the default (priority 1000 in `lua/plugins/colorschemes/catppuccin.lua`).
+- Tree-sitter highlighting and indentation are native in Neovim 0.12+ — the `nvim-treesitter` plugin is no longer used. Parsers are managed via `tree-sitter-manager.nvim` (`:TSManager`) or the `tree-sitter` CLI. Textobjects use the `main` branch of `nvim-treesitter-textobjects` with the standalone `require("nvim-treesitter-textobjects").setup({...})` API.
 
 ## Operations
 
