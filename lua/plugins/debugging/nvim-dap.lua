@@ -28,7 +28,42 @@ return {
         -- You can provide additional configuration to the handlers,
         -- see mason-nvim-dap.nvim's documentation
         handlers = {},
+
+        -- You'll need to check that you have the required things installed
+        -- online, please don't ask me how to install them :)
+        ensure_installed = {
+          "cppdbg",
+        },
       })
+
+      local gdb_path = vim.fn.exepath("gdb")
+      if gdb_path == "" then
+        gdb_path = "gdb"
+      end
+
+      dap.configurations.cpp = {
+        {
+          name = "Launch file (cppdbg)",
+          type = "cppdbg",
+          request = "launch",
+          program = function()
+            local path = vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            return path
+          end,
+          cwd = "${workspaceFolder}",
+          stopAtEntry = false,
+          MIMode = "gdb",
+          miDebuggerPath = gdb_path,
+          setupCommands = {
+            {
+              text = "-enable-pretty-printing",
+              description = "Enable pretty printing",
+              ignoreFailures = true,
+            },
+          },
+        },
+      }
+      dap.configurations.c = dap.configurations.cpp
 
       -- Dap UI setup
       -- For more information, see |:help nvim-dap-ui|

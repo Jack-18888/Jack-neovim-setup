@@ -42,3 +42,6 @@ vim.cmd("colorscheme catppuccin-frappe")
 -- Set custom coloring
 -- vim.api.nvim_set_hl(0, "Variable", { fg = "#abc7de" })
 -- vim.api.nvim_set_hl(0, "Constant", { fg = "#83afd4" })
+-- vim.api.nvim_set_hl(0, "@lsp.type.variable.cpp", { link = "Variable" })
+-- vim.api.nvim_set_hl(0, "@lsp.type.parameter.cpp", { link = "Variable" })
+-- vim.api.nvim_set_hl(0, "@lsp.mod.readonly.cpp", { link = "Constant" })

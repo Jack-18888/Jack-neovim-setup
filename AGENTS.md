@@ -16,13 +16,13 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 | `init.lua` | Entry point: bytecode loader, global options, default colorscheme (catppuccin-frappe) |
 | `lua/config/lazy.lua` | lazy.nvim bootstrap, leader keys (`Space`, local `\`), spec imports, performance settings |
 | `lua/config/keymaps.lua` | Global keymaps, colorscheme cycling, `:Bd` buffer-close command |
-| `lua/config/autocmds.lua` | Filetype indentation: Python 4 spaces; go tabs (width 4); lua/js/ts/json 2 spaces |
+| `lua/config/autocmds.lua` | Filetype indentation: Python 4 spaces; go/cpp/c tabs (width 4); lua/js/ts/json 2 spaces |
 | `lua/plugins/editing.lua` | conform (format on save) and nvim-lint (ruff) configuration |
 | `lua/plugins/editing/` | Per-plugin files: comment, diffview, flash, gitsigns, neogit, tabout, telescope (file is `telescop.lua`), which-key, ufo/statuscol |
 | `lua/plugins/lsp/` | lazydev, mason (tool installer), nvim-cmp, nvim-lspconfig, rustaceanvim, typescript-tools |
 | `lua/plugins/ui/` | nvim-tree, bufferline, lualine, alpha dashboard, noice, fidget, tiny-inline-diagnostic |
 | `lua/plugins/ai/copilot.lua` | Copilot (suggestions disabled by default) |
-| `lua/plugins/debugging/` | nvim-dap + nvim-dap-ui (generic setup, no per-language config) |
+| `lua/plugins/debugging/` | nvim-dap + nvim-dap-ui (C/C++ cppdbg configuration) |
 | `lua/plugins/treesitter/` | nvim-treesitter and textobjects |
 | `lua/plugins/colorschemes/` | catppuccin (default), tokyonight, vscode, gruvbox-material |
 | `lazy-lock.json` | Local plugin lockfile (gitignored) |
@@ -36,7 +36,7 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 - Keep global settings in `init.lua`, keymaps in `lua/config/keymaps.lua`, filetype behavior in `lua/config/autocmds.lua`.
 - Formatting/linting belong in `lua/plugins/editing.lua` (`formatters_by_ft` / `linters_by_ft`).
 - LSP servers: register tools in `lua/plugins/lsp/mason.lua` (`ensure_installed`) and enable/configure them in `lua/plugins/lsp/nvim-lspconfig.lua` via `vim.lsp.config` + `vim.lsp.enable` (Neovim 0.11 API). `automatic_enable = false` — servers are enabled explicitly per language.
-- OS-specific paths are hard-coded: Python at `C:/Users/T14G3/AppData/Local/Python/pythoncore-3.14-64` (prepended to PATH on win32 in `mason.lua`). The `ubuntu-config` branch carries the Linux equivalents.
+- OS-specific paths are hard-coded: clangd at `C:\msys64\ucrt64\bin\clangd.exe`, Python at `C:/Users/T14G3/AppData/Local/Python/pythoncore-3.14-64` (prepended to PATH on win32 in `mason.lua`). The `ubuntu-config` branch carries the Linux equivalents.
 - Colorscheme cycle order lives in the `colorschemes` list in `lua/config/keymaps.lua`; catppuccin is the default (priority 1000 in `lua/plugins/colorschemes/catppuccin.lua`).
 
 ## Operations
