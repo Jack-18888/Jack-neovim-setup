@@ -42,6 +42,13 @@ end, { bang = true })
 vim.cmd([[cnoreabbrev bd Bd]])
 vim.cmd([[cnoreabbrev bd! Bd!]])
 
+vim.keymap.set("n", "<leader>q", function()
+  safe_close_buffer(false)
+end, { noremap = true, silent = true, desc = "Close buffer and split" })
+vim.keymap.set("n", "<leader>fq", function()
+  safe_close_buffer(true)
+end, { noremap = true, silent = true, desc = "Force close buffer and split" })
+
 
 return {
   -- File Explorer
@@ -49,7 +56,10 @@ return {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = "NvimTreeToggle",
+    keys = {
+      { "<leader>t", "<cmd>NvimTreeToggle<CR>", mode = "n", desc = "Toggle file tree" },
+      { "<leader>rv", "<cmd>NvimTreeFindFile<CR>", mode = "n", desc = "NvimTree reveal file" },
+    },
     config = function()
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1

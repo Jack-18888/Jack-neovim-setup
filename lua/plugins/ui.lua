@@ -12,32 +12,6 @@ return {
     end,
   },
 
-  -- Buffer Tab Line
-  {
-    "akinsho/bufferline.nvim",
-    version = "*",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("bufferline").setup({
-        options = {
-          show_buffer_icons = true,
-          show_buffer_close_icons = true,
-          show_close_icon = true,
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = "File Explorer",
-              text_align = "left",
-              separator = true,
-            },
-          },
-          separator_style = "thin",
-        },
-      })
-    end,
-  },
-
   -- Status Line
   {
     "nvim-lualine/lualine.nvim",
