@@ -3,75 +3,12 @@
 
 return {
 
-  -- File Explorer
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = "NvimTreeToggle",
-    config = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      require("nvim-tree").setup({
-        sync_root_with_cwd = true,
-        view = { width = 35 },
-        git = { enable = true },
-        renderer = {
-          group_empty = true,
-          icons = {
-            show = {
-              file = true,
-              folder = true,
-              folder_arrow = true,
-              git = true,
-            },
-          },
-        },
-        actions = {
-          open_file = {
-            quit_on_open = false,
-          },
-        },
-        filters = {
-          dotfiles = false, -- Set to true to HIDE dotfiles by default
-          git_ignored = false, -- Set to true to HIDE git-ignored files by default
-        },
-      })
-   end,
-  },
-
   -- Icons
   {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
     config = function()
       require("nvim-web-devicons").setup()
-    end,
-  },
-
-  -- Buffer Tab Line
-  {
-    "akinsho/bufferline.nvim",
-    version = "*",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("bufferline").setup({
-        options = {
-          show_buffer_icons = true,
-          show_buffer_close_icons = true,
-          show_close_icon = true,
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = "File Explorer",
-              text_align = "left",
-              separator = true,
-            },
-          },
-          separator_style = "thin",
-        },
-      })
     end,
   },
 

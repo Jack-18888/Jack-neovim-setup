@@ -52,7 +52,6 @@ return {
       })
 
       vim.lsp.config("clangd", {
-        cmd = { "C:\\msys64\\ucrt64\\bin\\clangd.exe" },
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
