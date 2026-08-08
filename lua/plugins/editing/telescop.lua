@@ -10,8 +10,11 @@ local default_policy = {
 }
 
 local search_policy = {
-  allow_globs = {},
-  exclude_globs = {},
+  allow_globs = {
+  },
+  exclude_globs = {
+    '.git/**',
+  },
 }
 
 local function trim(value)
