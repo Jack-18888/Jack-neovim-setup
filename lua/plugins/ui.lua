@@ -3,43 +3,6 @@
 
 return {
 
-  -- File Explorer
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = "NvimTreeToggle",
-    config = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      require("nvim-tree").setup({
-        sync_root_with_cwd = true,
-        view = { width = 35 },
-        git = { enable = true },
-        renderer = {
-          group_empty = true,
-          icons = {
-            show = {
-              file = true,
-              folder = true,
-              folder_arrow = true,
-              git = true,
-            },
-          },
-        },
-        actions = {
-          open_file = {
-            quit_on_open = false,
-          },
-        },
-        filters = {
-          dotfiles = false, -- Set to true to HIDE dotfiles by default
-          git_ignored = false, -- Set to true to HIDE git-ignored files by default
-        },
-      })
-   end,
-  },
-
   -- Icons
   {
     "nvim-tree/nvim-web-devicons",
