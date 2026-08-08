@@ -56,6 +56,7 @@ vim.keymap.set("n", "<leader>fq", function()
 end, { noremap = true, silent = true, desc = "Force close buffer and split" })
 
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle file tree" })
+vim.keymap.set("n", "<leader>rv", ":NvimTreeFindFile<CR>", { noremap = true, silent = true, desc = "NvimTree reveal file" })
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true, desc = "Previous buffer" })
 
