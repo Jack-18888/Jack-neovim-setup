@@ -11,8 +11,6 @@ return {
         "gopls",     -- Go Language Server
         "gofumpt",   -- Stricter Go Formatter
         "goimports", -- Automatically fixes imports
-        "clangd",    -- C/C++ Language Server
-        "clang-format", -- C/C++ Formatter
       },
     },
     config = function(_, opts)

@@ -28,7 +28,7 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       require("mason-lspconfig").setup({
-        ensure_installed = { "pyright", "gopls", "clangd" },
+        ensure_installed = { "pyright", "gopls" },
         automatic_enable = false,
       })
 
@@ -51,17 +51,8 @@ return {
         },
       })
 
-      vim.lsp.config("clangd", {
-        cmd = { "C:\\msys64\\ucrt64\\bin\\clangd.exe" },
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-        },
-      })
-
       vim.lsp.enable("pyright")
       vim.lsp.enable("gopls")
-      vim.lsp.enable("clangd")
     end,
   }
 }
