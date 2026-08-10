@@ -4,7 +4,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
-    event = "BufReadPost",
+    event = "VeryLazy",
     init = function()
       -- INFO: Req #1: Disable auto-folding
       -- We set the fold level high so everything starts out open.
@@ -48,7 +48,7 @@ return {
   -- 1. statuscol.nvim: Takes control of the column to hide the numbers
   {
     "luukvbaal/statuscol.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
     config = function()
       local builtin = require("statuscol.builtin")
       require("statuscol").setup({

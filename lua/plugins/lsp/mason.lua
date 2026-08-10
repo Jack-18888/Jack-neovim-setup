@@ -3,7 +3,7 @@ return {
   -- Tool Installer
   {
     "williamboman/mason.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
     opts = {
       ensure_installed = {
         "pyright",   -- Python LSP
