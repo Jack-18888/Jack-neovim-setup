@@ -44,7 +44,7 @@ return {
         -- Change the Buttons (Menu)
         dashboard.section.buttons.val = {
             dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
-            dashboard.button("Space t", "  File Tree", ":NvimTreeToggle<CR>"),
+            dashboard.button("Space t", "  File Tree", ":lua Snacks.explorer.open()<CR>"),
             dashboard.button("Ctrl p", "  Open Terminal", ":80vsp | term powershell<CR>"),
             dashboard.button("Space f g", "勒 Search Text", ":Telescope live_grep<CR>"), 
             dashboard.button("Space f f", "  Find File", ":Telescope find_files<CR>"), 
