@@ -22,7 +22,7 @@ return {
         mason = true,
         neogit = true,
         notify = true,
-        nvimtree = true,
+        snacks = true,
         telescope = true,
         treesitter = true,
         ufo = true,
