@@ -7,13 +7,18 @@ return {
     opts = {
       bufdelete = { enabled = true },
       explorer = { enabled = true, replace_netrw = true },
+      scroll = { enabled = true },
       picker = {
         sources = {
           explorer = {
+            focus = "list",
             layout = {
+              -- auto_hide = { "input" },
               layout = {
                 position = "left",
                 width = 35,
+                box = "vertical",
+                { win = "list" },
               },
             },
             win = {
