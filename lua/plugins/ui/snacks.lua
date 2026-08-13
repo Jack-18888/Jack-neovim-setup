@@ -12,8 +12,9 @@ return {
         enabled = true,
         shell = "pwsh",
         win = {
-          position = "right",
-          width = 60,
+          style = "terminal",
+          position = "bottom",
+          height = 0.32,
         },
       },
       picker = {
