@@ -8,6 +8,14 @@ return {
       bufdelete = { enabled = true },
       explorer = { enabled = true, replace_netrw = true },
       scroll = { enabled = true },
+      terminal = {
+        enabled = true,
+        shell = "pwsh",
+        win = {
+          position = "right",
+          width = 60,
+        },
+      },
       picker = {
         sources = {
           explorer = {
