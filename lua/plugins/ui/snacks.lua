@@ -7,7 +7,19 @@ return {
     opts = {
       bufdelete = { enabled = true },
       explorer = { enabled = true, replace_netrw = true },
-      scroll = { enabled = true },
+      scroll = { 
+        enabled = true,
+        animate = { 
+          duration = { step = 5, total = 80 }, -- Default is step=10, total=200
+          easing = "linear",
+        },
+        -- Speeds up sequential scrolling (holding down keys)
+        animate_repeat = {
+          delay = 100, 
+          duration = { step = 3, total = 30 }, -- Default is step=5, total=50
+          easing = "linear",
+        },
+      },
       terminal = {
         enabled = true,
         shell = "pwsh",

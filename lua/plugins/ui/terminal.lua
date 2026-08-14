@@ -145,9 +145,16 @@ local function close_terminal()
     fallback = terms[(idx % #terms) + 1]
   end
 
-  -- Force delete the buffer to avoid job exit errors.
-  if current and current.buf and vim.api.nvim_buf_is_valid(current.buf) then
-    vim.api.nvim_buf_delete(current.buf, { force = true })
+  -- Delete the snacks win's augroup before killing the buffer so the
+  -- TermClose handler is gone before the shell exits with code -1.
+  if current then
+    if current.augroup then
+      pcall(vim.api.nvim_del_augroup_by_id, current.augroup)
+      current.augroup = nil
+    end
+    if current.buf and vim.api.nvim_buf_is_valid(current.buf) then
+      vim.api.nvim_buf_delete(current.buf, { force = true })
+    end
   end
 
   if fallback and fallback:buf_valid() then
@@ -171,7 +178,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- Terminal keymaps
 vim.keymap.set({ "n", "t" }, "<leader>p", focus_terminal, { desc = "Toggle terminal panel" })
 vim.keymap.set({ "n", "t" }, "<leader>P", new_terminal, { desc = "New terminal session" })
-vim.keymap.set({ "n", "t" }, "<leader>px", close_terminal, { desc = "Close terminal session" })
+vim.keymap.set({ "n", "t" }, "<leader>xp", close_terminal, { desc = "Close terminal session" })
 vim.keymap.set("t", "<A-]>", function() cycle_terminal(1) end, { desc = "Next terminal session" })
 vim.keymap.set("t", "<A-[>", function() cycle_terminal(-1) end, { desc = "Previous terminal session" })
 
