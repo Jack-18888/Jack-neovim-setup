@@ -3,16 +3,6 @@
 -- Enable byte-code caching loader for faster startup
 vim.loader.enable()
 
--- Add MSYS2 UCRT64 toolchain to PATH (gcc for tree-sitter parser builds, clangd, etc.)
-if vim.fn.has("win32") == 1 then
-  local msys2_bin = "D:/msys64/ucrt64/bin"
-  if not vim.env.PATH:find("msys64\\ucrt64\\bin", 1, true)
-    and not vim.env.PATH:find("msys64/ucrt64/bin", 1, true) then
-    vim.env.PATH = msys2_bin .. ";" .. vim.env.PATH
-  end
-  vim.env.CC = "gcc"
-end
-
 require("config.lazy")
 require("config.keymaps")
 require("config.autocmds")

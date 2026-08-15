@@ -14,12 +14,10 @@ autocmd("FileType", {
   end,
 })
 
--- 2. Golang: Tabs (Viewed as 4 spaces)
--- Go standards dictate real tabs, not spaces. 
 -- We set tabstop to 4 so it looks like 4 spaces visually.
 autocmd("FileType", {
   group = augroup,
-  pattern = { "go", "cpp", "c" },
+  pattern = { "cpp", "c" },
   callback = function()
     vim.opt_local.expandtab = false  
     vim.opt_local.shiftwidth = 4
