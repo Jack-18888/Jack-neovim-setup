@@ -47,7 +47,7 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 - **Change indentation rules**: edit the filetype patterns in `lua/config/autocmds.lua`.
 - **Add formatting/linting**: extend `formatters_by_ft` / `linters_by_ft` in `lua/plugins/editing.lua`, and add the tools to Mason's `ensure_installed` where applicable.
 - **Add a colorscheme**: add a spec under `lua/plugins/colorschemes/` and append it to the `colorschemes` list in `lua/config/keymaps.lua`.
-- **Telescope search policy**: persisted at `stdpath('state')/telescope_search_policy.json`; `.git/**` is always excluded and the picker runs `rg --files --hidden --no-ignore` plus policy globs. Runtime commands `<leader>fa` / `<leader>fx` / `<leader>fp` / `<leader>fr` manage it.
+- **Telescope search policy**: persisted at `stdpath('state')/telescope_search_policy.json`; `**/.git/**` is always excluded and the picker runs `rg --files --hidden --no-ignore` plus policy globs. Runtime commands `<leader>fa` / `<leader>fx` / `<leader>fp` / `<leader>fr` manage it.
 
 ### Verification
 
