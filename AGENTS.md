@@ -20,7 +20,7 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 | `lua/plugins/editing.lua` | conform (format on save) and nvim-lint (ruff) configuration |
 | `lua/plugins/editing/` | Per-plugin files: comment, diffview, flash, gitsigns, neogit, tabout, telescope (file is `telescop.lua`), which-key, ufo/statuscol |
 | `lua/plugins/lsp/` | lazydev, mason (tool installer), nvim-cmp, nvim-lspconfig, rustaceanvim, typescript-tools |
-| `lua/plugins/ui/` | nvim-tree, bufferline, lualine, alpha dashboard, noice, fidget, tiny-inline-diagnostic |
+| `lua/plugins/ui/` | bufferline, lualine, alpha dashboard, noice, fidget, tiny-inline-diagnostic, snacks |
 | `lua/plugins/ai/copilot.lua` | Copilot (suggestions disabled by default) |
 | `lua/plugins/debugging/` | nvim-dap + nvim-dap-ui (C/C++ cppdbg configuration) |
 | `lua/plugins/treesitter/` | Native treesitter config (Neovim 0.12+): `native-treesitter.lua` enables built-in highlighting via `vim.treesitter.start()` and textobjects (`main` branch of nvim-treesitter-textobjects); `treesitter-manager.lua` manages parser installation via `tree-sitter` CLI |

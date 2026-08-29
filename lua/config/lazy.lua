@@ -25,7 +25,6 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
   spec = {
     -- import your plugins
-    { import = "plugins" },
     { import = "plugins.colorschemes" },
     { import = "plugins.ui" },
     { import = "plugins.ai" },
@@ -59,6 +58,8 @@ require("lazy").setup({
         "logipat",
         "vimball",
         "vimballPlugin",
+        "rplugin",
+        "spellfile",
       },
     },
   },

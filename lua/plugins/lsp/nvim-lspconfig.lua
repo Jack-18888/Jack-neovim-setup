@@ -5,8 +5,6 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
@@ -26,11 +24,6 @@ return {
       end
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      require("mason-lspconfig").setup({
-        ensure_installed = { "pyright", "gopls", "clangd" },
-        automatic_enable = false,
-      })
 
       vim.lsp.config("pyright", {
         on_attach = on_attach,

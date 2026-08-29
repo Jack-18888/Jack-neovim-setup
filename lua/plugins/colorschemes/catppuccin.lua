@@ -8,8 +8,8 @@ return {
     opts = {
       compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
       compile = true,
-      -- Disable all default integrations, enable only what we use
-      default_integrations = false,
+      -- Disable auto-detection to prevent slow vim.pack filesystem scanning at startup
+      auto_integrations = false,
       integrations = {
         alpha = true,
         cmp = true,
