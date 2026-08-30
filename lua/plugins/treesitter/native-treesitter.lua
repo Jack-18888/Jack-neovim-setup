@@ -4,8 +4,21 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
+    keys = {
+      { "af", mode = { "x", "o" }, desc = "Select outer function" },
+      { "if", mode = { "x", "o" }, desc = "Select inner function" },
+      { "ac", mode = { "x", "o" }, desc = "Select outer class" },
+      { "ic", mode = { "x", "o" }, desc = "Select inner class" },
+      { "]f", mode = { "n", "x", "o" }, desc = "Next function start" },
+      { "]c", mode = { "n", "x", "o" }, desc = "Next class start" },
+      { "]g", mode = { "n", "x", "o" }, desc = "Next function end" },
+      { "]v", mode = { "n", "x", "o" }, desc = "Next class end" },
+      { "[f", mode = { "n", "x", "o" }, desc = "Prev function start" },
+      { "[c", mode = { "n", "x", "o" }, desc = "Prev class start" },
+      { "[g", mode = { "n", "x", "o" }, desc = "Prev function end" },
+      { "[v", mode = { "n", "x", "o" }, desc = "Prev class end" },
+    },
+    init = function()
       -- Enable native treesitter highlighting for all filetypes with a parser
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("NativeTreesitter", { clear = true }),
@@ -13,6 +26,8 @@ return {
           pcall(vim.treesitter.start, args.buf)
         end,
       })
+    end,
+    config = function()
 
       -- Configure textobjects (options only — keymaps are set manually below)
       require("nvim-treesitter-textobjects").setup({

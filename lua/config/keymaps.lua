@@ -35,3 +35,8 @@ vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]], { desc = 'Move to left split'
 vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]], { desc = 'Move to bottom split' })
 vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]], { desc = 'Move to top split' })
 vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]], { desc = 'Move to right split' })
+
+-- Copy file paths
+vim.keymap.set("n", "<leader>ca", ':let @+ = expand("%:p")<CR>', { desc = "Copy absolute file path" })
+vim.keymap.set("n", "<leader>cr", ':let @+ = expand("%:.")<CR>', { desc = "Copy relative file path" })
+vim.keymap.set("n", "<leader>cf", ':let @+ = expand("%:t")<CR>', { desc = "Copy file name" })

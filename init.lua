@@ -19,7 +19,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.swapfile = false
 
 vim.opt.number = true -- Good to have
-vim.opt.scrolloff = 8 -- Keep 8 lines visible when scrolling
+vim.opt.scrolloff = 15 -- Keep 15 lines visible when scrolling
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true

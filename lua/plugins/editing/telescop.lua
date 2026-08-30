@@ -5,7 +5,7 @@ local default_policy = {
   allow_globs = {
   },
   exclude_globs = {
-    '.git/**',
+    '**/.git/**', '**/node_modules/**', '**/.*/**', '**/__*/**'
   },
 }
 
@@ -13,9 +13,11 @@ local search_policy = {
   allow_globs = {
   },
   exclude_globs = {
-    '.git/**',
+    '**/.git/**', '**/node_modules/**', '**/.*/**', '**/__*/**'
   },
 }
+
+local policy_loaded = false
 
 local function trim(value)
   return value:match('^%s*(.-)%s*$')
@@ -40,18 +42,22 @@ local function ensure_git_excluded(exclude_globs)
   local output = unique_non_empty(exclude_globs)
   local has_git = false
 
-  for _, pattern in ipairs(output) do
-    if pattern == '.git/**' then
+  for i, pattern in ipairs(output) do
+    if pattern == '**/.git/**' then
+      has_git = true
+      break
+    elseif pattern == '.git/**' or pattern == '*/.git/**' then
+      output[i] = '**/.git/**'
       has_git = true
       break
     end
   end
 
   if not has_git then
-    table.insert(output, 1, '.git/**')
+    table.insert(output, 1, '**/.git/**')
   end
 
-  return output
+  return unique_non_empty(output)
 end
 
 local function normalize_policy(policy)
@@ -87,6 +93,7 @@ local function save_policy()
 
   file:write(vim.json.encode(search_policy))
   file:close()
+  policy_loaded = true
 end
 
 local function load_policy()
@@ -112,8 +119,9 @@ local function globs_to_string(globs)
 end
 
 local function ensure_policy()
-  if not search_policy or not search_policy.allow_globs then
+  if not policy_loaded then
     load_policy()
+    policy_loaded = true
   end
 end
 
@@ -146,7 +154,7 @@ local function set_exclude_globs()
 
     search_policy.exclude_globs = ensure_git_excluded(parse_csv_globs(input))
     save_policy()
-    vim.notify('Telescope exclude globs updated (.git/** always excluded)', vim.log.levels.INFO)
+    vim.notify('Telescope exclude globs updated (**/.git/** always excluded)', vim.log.levels.INFO)
   end)
 end
 

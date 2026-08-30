@@ -20,7 +20,7 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 | `lua/plugins/editing.lua` | conform (format on save) and nvim-lint (ruff) configuration |
 | `lua/plugins/editing/` | Per-plugin files: comment, diffview, flash, gitsigns, neogit, tabout, telescope (file is `telescop.lua`), which-key, ufo/statuscol |
 | `lua/plugins/lsp/` | lazydev, mason (tool installer), nvim-cmp, nvim-lspconfig, rustaceanvim, typescript-tools |
-| `lua/plugins/ui/` | nvim-tree, bufferline, lualine, alpha dashboard, noice, fidget, tiny-inline-diagnostic |
+| `lua/plugins/ui/` | bufferline, lualine, alpha dashboard, noice, fidget, tiny-inline-diagnostic, snacks |
 | `lua/plugins/ai/copilot.lua` | Copilot (suggestions disabled by default) |
 | `lua/plugins/debugging/` | nvim-dap + nvim-dap-ui (C/C++ cppdbg configuration) |
 | `lua/plugins/treesitter/` | Native treesitter config (Neovim 0.12+): `native-treesitter.lua` enables built-in highlighting via `vim.treesitter.start()` and textobjects (`main` branch of nvim-treesitter-textobjects); `treesitter-manager.lua` manages parser installation via `tree-sitter` CLI |
@@ -47,7 +47,7 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 - **Change indentation rules**: edit the filetype patterns in `lua/config/autocmds.lua`.
 - **Add formatting/linting**: extend `formatters_by_ft` / `linters_by_ft` in `lua/plugins/editing.lua`, and add the tools to Mason's `ensure_installed` where applicable.
 - **Add a colorscheme**: add a spec under `lua/plugins/colorschemes/` and append it to the `colorschemes` list in `lua/config/keymaps.lua`.
-- **Telescope search policy**: persisted at `stdpath('state')/telescope_search_policy.json`; `.git/**` is always excluded and the picker runs `rg --files --hidden --no-ignore` plus policy globs. Runtime commands `<leader>fa` / `<leader>fx` / `<leader>fp` / `<leader>fr` manage it.
+- **Telescope search policy**: persisted at `stdpath('state')/telescope_search_policy.json`; `**/.git/**` is always excluded and the picker runs `rg --files --hidden --no-ignore` plus policy globs. Runtime commands `<leader>fa` / `<leader>fx` / `<leader>fp` / `<leader>fr` manage it.
 
 ### Verification
 

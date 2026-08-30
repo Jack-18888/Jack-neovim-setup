@@ -26,7 +26,7 @@ return {
   -- Linter
   {
     "mfussenegger/nvim-lint",
-    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    ft = { "python" },
     config = function()
       require("lint").linters_by_ft = {
         python = { "ruff" },

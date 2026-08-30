@@ -1,11 +1,4 @@
 
-vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next buffer" })
-vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true, desc = "Previous buffer" })
-vim.keymap.set("n", "<leader><Tab>", function()
-    vim.cmd("BufferLineCyclePrev")
-    vim.cmd("BufferLineCloseRight")
-end, { noremap = true, silent = true, desc = "Go to previous buffer and close those to the right" })
-
 return {
   -- Buffer Tab Line
   {
@@ -13,6 +6,18 @@ return {
     version = "*",
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      { "<Tab>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+      { "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
+      {
+        "<leader><Tab>",
+        function()
+          vim.cmd("BufferLineCyclePrev")
+          vim.cmd("BufferLineCloseRight")
+        end,
+        desc = "Go to previous buffer and close those to the right",
+      },
+    },
     config = function()
       require("bufferline").setup({
         options = {
