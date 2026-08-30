@@ -3,12 +3,21 @@
 -- Enable byte-code caching loader for faster startup
 vim.loader.enable()
 
--- Add MSYS2 UCRT64 toolchain to PATH (gcc for tree-sitter parser builds, clangd, etc.)
+-- Add MSYS2 UCRT64 toolchain, Python, and Mason bin to PATH
 if vim.fn.has("win32") == 1 then
   local msys2_bin = "D:/msys64/ucrt64/bin"
   if not vim.env.PATH:find("msys64\\ucrt64\\bin", 1, true)
     and not vim.env.PATH:find("msys64/ucrt64/bin", 1, true) then
     vim.env.PATH = msys2_bin .. ";" .. vim.env.PATH
+  end
+  local win_python = "C:/Users/T14G3/AppData/Local/Python/pythoncore-3.14-64"
+  if not vim.env.PATH:find("pythoncore-3.14-64", 1, true) then
+    vim.env.PATH = win_python .. ";" .. vim.env.PATH
+  end
+  local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+  if not vim.env.PATH:find("mason/bin", 1, true)
+    and not vim.env.PATH:find("mason\\bin", 1, true) then
+    vim.env.PATH = mason_bin .. ";" .. vim.env.PATH
   end
   vim.env.CC = "gcc"
 end
@@ -29,7 +38,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.swapfile = false
 
 vim.opt.number = true -- Good to have
-vim.opt.scrolloff = 8 -- Keep 8 lines visible when scrolling
+vim.opt.scrolloff = 15 -- Keep 15 lines visible when scrolling
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
