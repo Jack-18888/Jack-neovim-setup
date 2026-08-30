@@ -10,7 +10,6 @@ return {
       scroll = { enabled = true },
       terminal = {
         enabled = true,
-        shell = "pwsh",
         win = {
           position = "right",
           width = 60,
