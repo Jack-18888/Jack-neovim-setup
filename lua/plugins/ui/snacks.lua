@@ -198,7 +198,7 @@ return {
         win = {
           style = "terminal",
           position = "bottom",
-          height = 0.32,
+          height = 0.3,
         },
       },
       picker = {

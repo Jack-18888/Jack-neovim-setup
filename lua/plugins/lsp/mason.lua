@@ -12,6 +12,9 @@ return {
       ensure_installed = {
         "pyright",   -- Python LSP
         "ruff",      -- Python Linter/Formatter
+        "gopls",     -- Go Language Server
+        "gofumpt",   -- Stricter Go Formatter
+        "goimports", -- Automatically fixes imports
         "clangd",    -- C/C++ Language Server
         "clang-format", -- C/C++ Formatter
       },
