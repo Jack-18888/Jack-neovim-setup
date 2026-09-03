@@ -197,8 +197,8 @@ return {
         enabled = true,
         win = {
           style = "terminal",
-          position = "bottom",
-          height = 0.3,
+          position = "right",
+          width = 0.3,
         },
       },
       picker = {

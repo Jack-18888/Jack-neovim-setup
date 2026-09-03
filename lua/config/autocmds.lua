@@ -5,7 +5,7 @@ local augroup = vim.api.nvim_create_augroup("CustomIndent", { clear = true })
 -- 1. Python: 4 spaces
 autocmd("FileType", {
   group = augroup,
-  pattern = "python",
+  pattern = { "python", "go" },
   callback = function()
     vim.opt_local.expandtab = true   -- Use spaces instead of tabs
     vim.opt_local.shiftwidth = 4     -- Size of an indent
