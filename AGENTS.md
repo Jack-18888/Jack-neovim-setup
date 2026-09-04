@@ -60,7 +60,7 @@ Guidance for AI coding agents (and contributors) working on this Neovim configur
 
 - `copilot.lua` sets `suggestion.enabled = false` by default — only enable it when the user asks.
 - Clipboard is set on the `VeryLazy` event to avoid conflicts with plugin clipboard settings.
-- `<Tab>` is already owned by nvim-cmp (menu navigation) and tabout (jump out of pairs); LuaSnip's default Tab binding is deliberately disabled in `lua/plugins/editing/tabout.lua`. Avoid introducing conflicting `<Tab>` maps.
+- `<Tab>` is owned by nvim-cmp (menu navigation) and tabout (jump out of pairs); snippets are completely disabled across the configuration (`snippetSupport = false` in LSP capabilities, snippet entries filtered out in nvim-cmp, and LuaSnip removed). Avoid introducing conflicting `<Tab>` maps.
 - `<leader><Tab>` jumps to the previous buffer and closes all buffers to its right — bufferline must remain functional for this.
 - `:Bd` and `<leader>q` intentionally never close NvimTree buffers (guarded by `filetype == "NvimTree"` in `keymaps.lua`).
 - The alpha dashboard button for the terminal still uses `term powershell` while the global keymap uses `term pwsh` — a known inconsistency; align the dashboard if editing it.

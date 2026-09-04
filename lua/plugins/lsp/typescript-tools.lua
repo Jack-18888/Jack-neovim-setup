@@ -20,8 +20,16 @@ return {
         nmap("<leader>e", vim.diagnostic.open_float, "Show Diagnostics")
       end
 
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = false
+      if pcall(require, "cmp_nvim_lsp") then
+        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+        capabilities.textDocument.completion.completionItem.snippetSupport = false
+      end
+
       -- 2. Setup the plugin with the on_attach function
       require("typescript-tools").setup({
+        capabilities = capabilities,
         on_attach = on_attach,
         settings = {
           -- spawn additional tsserver processes for faster response

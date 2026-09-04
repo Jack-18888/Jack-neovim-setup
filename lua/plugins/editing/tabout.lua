@@ -20,17 +20,11 @@ return {
           { open = '`', close = '`' },
           { open = '(', close = ')' },
           { open = '[', close = ']' },
+          { open = '{', close = '}' }
         },
         ignore_beginning = false, -- shift content instead of tabbing out when at beginning of element
         exclude = {} -- tabout will ignore these filetypes
       }
-    end,
-  },
-  {
-    "L3MON4D3/LuaSnip",
-    keys = function()
-      -- Disable default tab keybinding in LuaSnip
-      return {}
     end,
   },
 }

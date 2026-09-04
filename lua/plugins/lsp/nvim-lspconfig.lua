@@ -24,6 +24,11 @@ return {
       end
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = false
+
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
 
       vim.lsp.config("pyright", {
         on_attach = on_attach,
@@ -36,7 +41,7 @@ return {
         settings = {
           gopls = {
             completeUnimported = true,
-            usePlaceholders = true,
+            usePlaceholders = false,
             analyses = {
               unusedparams = true,
             },

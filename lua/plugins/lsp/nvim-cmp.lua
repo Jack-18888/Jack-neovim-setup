@@ -8,28 +8,33 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
       "abecodes/tabout.nvim",
     },
     config = function()
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
-
-      luasnip.config.setup({
-        region_check_events = "CursorMoved,InsertLeave",
-        delete_check_events = "TextChanged,InsertLeave",
-      })
+      local types = require("cmp.types")
 
       cmp.setup({
         snippet = {
           expand = function(args)
-            luasnip.lsp_expand(args.body)
+            vim.snippet.expand(args.body)
           end,
         },
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
+          {
+            name = "nvim_lsp",
+            entry_filter = function(entry, _)
+              local item = entry:get_completion_item()
+              if entry:get_kind() == types.lsp.CompletionItemKind.Snippet then
+                return false
+              end
+              if item and item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
+                return false
+              end
+              return true
+            end,
+          },
+          { name = "lazydev", group_index = 0 },
           { name = "buffer", keyword_length = 3 },
           { name = "path" },
         }),
@@ -42,8 +47,6 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.locally_jumpable(1) then
-              luasnip.jump(1)
             else
               fallback()
             end
@@ -51,20 +54,11 @@ return {
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
             else
               fallback()
             end
           end, { "i", "s" }),
         }),
-      })
-    end,
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, {
-        name = "lazydev",
-        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
       })
     end,
   }
