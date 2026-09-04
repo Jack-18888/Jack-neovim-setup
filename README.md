@@ -8,7 +8,7 @@ A fast, fully featured Neovim configuration for Windows 11, written in Lua and m
 - **Language tooling** — LSP via nvim-lspconfig + Mason: Python (pyright + ruff), Go (gopls), C/C++ (clangd), Rust (rust-analyzer via rustaceanvim), TypeScript/JavaScript (typescript-tools). Autocompletion with nvim-cmp.
 - **Treesitter** — syntax highlighting, indentation, and textobjects for functions and classes.
 - **Formatting & linting** — conform formats on save (ruff_format for Python, goimports + gofumpt for Go); nvim-lint runs ruff for Python.
-- **Debugging** — nvim-dap with nvim-dap-ui, `F5`/`F1`/`F2`/`F3` controls, and a ready C/C++ cppdbg configuration.
+- **Debugging** — nvim-dap with nvim-dap-ui, automatic C/C++ compilation on `<F5>`, `F1`/`F2`/`F3` stepping controls, and ready cppdbg/gdb configuration.
 - **Git workflow** — gitsigns gutter signs, Neogit UI, and Diffview.
 - **Search** — Telescope with a persistent include/exclude glob policy and multi-select file opening.
 - **UI polish** — nvim-tree file explorer, bufferline tabs, lualine statusline, alpha dashboard, noice.nvim, inline diagnostics, and ufo folding with statuscol.
